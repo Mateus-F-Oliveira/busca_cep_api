@@ -45,6 +45,48 @@ namespace ApiBuscaCepV2.Controllers
             }
         }
 
+        [HttpGet("login/{email}/{senha}")]
+        public ActionResult<int> Login(string email, string senha)
+        {
+            try
+            {
+                if (email is null || senha is null)
+                {
+                    return BadRequest();
+                }
+                var usuario = _context.Usuario!.FirstOrDefault(u => u.Email == email && u.Senha == senha);
+                if (usuario is null)
+                {
+                    return NotFound();
+                }
+                int id = usuario!.UsuarioId;
+                return id;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet("getnome/{id:int}")]
+        public ActionResult<string> GetNome(int id)
+        {
+            try
+            {
+                var usuario = _context.Usuario!.FirstOrDefault(u => u.UsuarioId == id);
+                if (usuario is null)
+                {
+                    return NotFound();
+                }
+                string? nome = usuario!.Nome;
+                return nome!;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
         [HttpPost]
         public ActionResult Post(Usuario usuario)
         {
