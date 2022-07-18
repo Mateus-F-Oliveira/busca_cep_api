@@ -1,7 +1,7 @@
 ﻿using ApiBuscaCepV2.Context;
 using ApiBuscaCepV2.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore; 
 
 namespace ApiBuscaCepV2.Controllers
 {
